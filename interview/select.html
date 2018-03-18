@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <div id="page">
+      <div class="content main">
+        <div class="refer">
+          <ul>
+            <li>1</li>
+            <li>2</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      function getDomDetail() {
+        var all = document.all, // DOM节点集合
+            obj = {},           // 存放节点类型
+            typeNum = 0;        // 节点类型数 
+        
+        [].forEach.call(all, function(item, index) {
+          if (!obj[item.tagName]) {
+            obj[item.tagName] = true;
+            typeNum++;
+          }
+        });
+
+        console.log('DOM节点总数：' + all.length + "\nDOM类型数：" + typeNum)
+      }
+
+      getDomDetail();
+    </script>
+  </body>
+</html>
