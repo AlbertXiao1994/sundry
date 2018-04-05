@@ -1,7 +1,7 @@
 {
   "name": "file-explorer",
   "version": "0.0.1",
-  "description": "node demo",
+  "description": "A command-line file explorer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
