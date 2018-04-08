@@ -3,7 +3,7 @@
  * Module requirements.
  */
 
-var express = require('express'),
+var connect = require('connect'),
     bodyParser = require('body-parser'),
     serveStatic = require('serve-static');
 
@@ -11,7 +11,7 @@ var express = require('express'),
  * Create server
  */
 
-var app = express();
+var app = connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
