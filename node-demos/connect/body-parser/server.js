@@ -3,38 +3,23 @@
  * Module requirements.
  */
 
-var connect = require('connect')
-  , fs = require('fs'),
+var express = require('express'),
     bodyParser = require('body-parser'),
-    serveStatic = require('serve-static'),
-    http = require('http');
+    serveStatic = require('serve-static');
 
 /**
  * Create server
  */
 
-var app = connect();
+var app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(serveStatic('static'));
 
 app.use(function (req, res) {
-  if ('POST' == req.method && req.body.file) {
-    fs.readFile(req.body.file.path, 'utf8', function (err, data) {
-      if (err) {
-        res.writeHead(500);
-        res.end('Error!');
-        return;
-      }
-
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end([
-          '<h3>File: ' + req.body.file.name + '</h3>'
-        , '<h4>Type: ' + req.body.file.type + '</h4>'
-        , '<h4>Contents:</h4><pre>' + data + '</pre>'
-      ].join(''));
-    });
+  if ('POST' == req.method && req.body.input) {
+    res.end(req.body.input);
   }
 });
 
@@ -42,4 +27,4 @@ app.use(function (req, res) {
  * Listen.
  */
 
-http.createServer(app).listen(3000);
+app.listen(3000);
