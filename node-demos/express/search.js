@@ -1,5 +1,5 @@
-var qs = require('querystring')
-  , http = require('http');
+var request = require('superagent'),
+    qs = require('querystring');
 
 /** 
  * 搜索函数
@@ -8,27 +8,15 @@ var qs = require('querystring')
  * @param {Function} fn - 回调函数
  * @api public
 */
-
-module.exports = function search(query, fn) {
-  http.request({
-    host: 'https://api.github.com',
-    path: '/search/repositories?' + qs.stringify({q: query}) + '&sort=stars'
-  }, function(res) {
-    res.setEncoding('utf8');
-    var body = '';
-
-    res.on('data', function(chunk) {
-      body += chunk;
-    });
-
-    res.on('end', function() {
-      try {
-        var obj = JSON.parse(body);
-      } catch (e) {
+module.exports = function search (query, fn) {
+  request('https://api.github.com/search/repositories')
+  .query({ q: query, sort: 'stars' })
+  .then(function (res) {
+      var obj = res.body;
+      if (!obj) {
         return fn(new Error('Bad twitter response'));
       }
-
+      
       fn(null, obj.items);
-    });
-  }).end();
+  })
 };

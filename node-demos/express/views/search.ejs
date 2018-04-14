@@ -1,13 +1,13 @@
 <h1>Search Results for <%= search %></h1>
 
 <% if (results.length) { %>
-  <ul>
+  <ol>
     <% for (var i = 0; i < results.length; i++) { %>
       <li>
-        <a href="<%= results[i].url %>"><%= results[i].name %></a> <%= results[i].star %>
+        <a href="<%= results[i].url %>"><%= results[i].name %></a> <%= results[i].stargazers_count %>
       </li>
     <% } %>
-  </ul>
+  </ol>
 <% } else { %>
   <p>no result</p>
 <% } %>

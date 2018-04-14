@@ -14,13 +14,10 @@ app.get('/search', function(req, res, next) {
   search(req.query.q, function(err, data) {
     if (err) {
       return next(err);
-      console.log(err)
     }
-    var res = {};
-    res.url = data.url;
-    res.name = data.name;
-    res.star = data.stargazers_count;
-    res.render("search", {results: res, search: req.query.q,})
+
+    res.render("search", {results: data, search: req.query.q});
+    // res.render('index');
   });
 });
 
