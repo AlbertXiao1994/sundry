@@ -29,7 +29,13 @@ function elect(socket) {
 
 io.socket.on('connection', function(socket) {
   socket.on('join', function(name) {
-
+    socket.nickname = name;
+    socket.broadcast.emit('announcement', name + ' joined the chat.');
+    if (!dj) {
+      elect(socket);
+    } else {
+      socket.emit('song', currentSong);
+    }
   });
 
   socket.on('song', function(currentSong) {
