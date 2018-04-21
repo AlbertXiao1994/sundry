@@ -1,4 +1,4 @@
-windos.onload = function() {
+window.onload = function() {
   var socket = io.connect();
   socket.on('connect', function() {
     socket.emit('join', prompt('请输入您的名字：'));
@@ -10,7 +10,7 @@ windos.onload = function() {
   socket.on('announcement', function(msg) {
     var li = document.createElement('li');
     li.className = 'announcement';
-    li.innnerHTML = msg;
+    li.innerHTML = msg;
     document.getElementById('messages').appendChild(li);
   });
 };
