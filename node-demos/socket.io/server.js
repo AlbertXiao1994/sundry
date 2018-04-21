@@ -2,7 +2,8 @@ var express = require('express'),
     app = express(),
     path = require('path'),
     server = require('http').createServer(app)
-    io = require('socket.io')(server);
+    io = require('socket.io')(server),
+    request = require('superagent');
 
 app.use(express.static("public"));
 
