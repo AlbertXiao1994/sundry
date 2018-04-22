@@ -14,3 +14,21 @@ window.onload = function() {
     document.getElementById('messages').appendChild(li);
   });
 };
+
+function addMessage(from, text) {
+  var li = document.createElement('li');
+  li.className = 'messages';
+  li.innerHTML = '<br>' + from + '</b>: ' + text;
+}
+
+var input = document.getElementById('input');
+document.getElementById('form').onsubmit = function() {
+  addMessage('me', input.value);
+  socket.emit('text', iinput.value);
+
+  // 重置输入框
+  input.value = '';
+  input.focus();
+
+  return false;
+}
