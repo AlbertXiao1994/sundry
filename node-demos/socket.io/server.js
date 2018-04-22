@@ -46,6 +46,6 @@ io.on('connection', function(socket) {
   });
 
   socket.on('text', function(msg) {
-
+    
   });
 });
