@@ -13,7 +13,7 @@ var express = require('express'),
  * 设置应用
  */
 
-app = express();
+var app = express();
 
 /** 
  * 中间件
@@ -50,7 +50,7 @@ app.get('/login', function(req, res) {
  * 注册路由
 */
 
-app.get('/singup', function(req, res) {
+app.get('/signup', function(req, res) {
   res.render('signup');
 });
 
