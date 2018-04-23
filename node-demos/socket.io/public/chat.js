@@ -1,34 +1,49 @@
 window.onload = function() {
-  var socket = io.connect();
+  var socket = io();
   socket.on('connect', function() {
     socket.emit('join', prompt('请输入您的名字：'));
+
+    // 显示聊天框
+    document.getElementById('chat').style.display = 'block';
+
+    socket.on('announcement', function(msg) {
+      var li = document.createElement('li');
+      li.className = 'announcement';
+      li.innerHTML = msg;
+      document.getElementById('messages').appendChild(li);
+    });
   });
 
-  // 显示聊天框
-  document.getElementById('chat').style.display = 'block';
-
-  socket.on('announcement', function(msg) {
+  function addMessage(from, text) {
     var li = document.createElement('li');
-    li.className = 'announcement';
-    li.innerHTML = msg;
+    li.className = 'messages';
+    li.innerHTML = '<br>' + from + '</b>: ' + text;
     document.getElementById('messages').appendChild(li);
+  }
+  
+  var input = document.getElementById('input');
+  document.getElementById('form').onsubmit = function () {
+    addMessage('me', input.value);
+    socket.emit('text', input.value);
+
+    // reset the input
+    input.value = '';
+    input.focus();
+
+    return false;
+  }
+  
+  socket.on('text', function(from, text) {
+    console.log('client text ok')
+    addMessage(from, text);
   });
-};
 
-function addMessage(from, text) {
-  var li = document.createElement('li');
-  li.className = 'messages';
-  li.innerHTML = '<br>' + from + '</b>: ' + text;
-}
+  var form = document.getElementById('dj');
+  form.onsubmit = function () {
+    return false;
+  };
 
-var input = document.getElementById('input');
-document.getElementById('form').onsubmit = function() {
-  addMessage('me', input.value);
-  socket.emit('text', iinput.value);
-
-  // 重置输入框
-  input.value = '';
-  input.focus();
-
-  return false;
+  socket.on('elected', function () {
+    form.className = 'isDJ';
+  });
 }
