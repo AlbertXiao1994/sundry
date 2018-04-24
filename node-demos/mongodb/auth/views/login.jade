@@ -1,6 +1,10 @@
 //- extends ./layout
 //- block content
-form(action="/signup", method="POST")
+
+if (signupEmail)
+  p Congratulations on signing up! Please login below.
+
+form(action="/login", method="POST")
   fieldset
     legend Log in
     p
