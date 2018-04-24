@@ -1,0 +1,9 @@
+{
+  "name": "user-auth",
+  "verison": "0.0.1",
+  "dependencies": {
+    "express": "4.16.3",
+    "mongoose": "5.0.16",
+    "jade": "1.11.0"
+  }
+}
